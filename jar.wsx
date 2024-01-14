@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Product Id="*" Name="Truly Unusual Experience of Revolution" Language="1033" Version="0.0.0.0" Manufacturer="Julien Gouesse" UpgradeCode="00000000-0000-0000-0000-000000000000">
+	<!-- Installer's version = 200 because the 64-bit support is required -->
+    <Package InstallerVersion="200" InstallPrivileges="elevated" InstallScope="perMachine" Compressed="yes" Platform="x64" />
+    <Media Id="1" Cabinet="media1.cab" EmbedCab="yes" />
+    <MajorUpgrade AllowDowngrades="yes" IgnoreRemoveFailure="yes" Schedule="afterInstallInitialize" />
+    <Condition Message="This application is only supported on Windows XP, Windows Vista, Windows Server 2008, or higher.">
+      <![CDATA[Installed OR (VersionNT >= 501)]]>
+    </Condition>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="APPLICATIONROOTDIRECTORY" Name="Truly Unusual Experience of Revolution">
+		  <Component Id="Pharm.jar" Guid="00000000-0000-0000-0000-000000000000">
+            <File Id="Pharm.jar" Source="target/Pharm.jar" KeyPath="yes"/>
+		  </Component>
+		</Directory>
+      </Directory>
+	  <Directory Id="ProgramMenuFolder">
+        <Directory Id="ApplicationProgramsFolder" Name="Truly Unusual Experience of Revolution"/>
+      </Directory>
+	</Directory>
+	<!-- Shortcut in the Start Menu -->
+	<DirectoryRef Id="ApplicationProgramsFolder">
+      <Component Id="ApplicationShortcut" Guid="00000000-0000-0000-0000-000000000000">
+        <Shortcut Id="ApplicationStartMenuShortcut" 
+                  Name="Truly Unusual Experience of Revolution" 
+                  Description="First person shooter"
+                  Target="[#Pharm.jar]"
+                  WorkingDirectory="APPLICATIONROOTDIRECTORY" />
+          <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall"/>
+          <RegistryValue Root="HKCU" Key="Software\Microsoft\TrulyUnusualExperienceofRevolution" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+      </Component>
+    </DirectoryRef>
+    <Feature Id="TrulyUnusualExperienceofRevolution" Title="Truly Unusual Experience of Revolution" Level="1">
+	  <ComponentRef Id="Pharm.jar" />
+	</Feature>
+  </Product>
+</Wix>

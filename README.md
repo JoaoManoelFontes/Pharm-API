@@ -16,4 +16,4 @@ This project is a CRUD API for a pharmacy management system using Java Spring Bo
 * Configure your MySQL connection in the file ```application.properties```
 * Run the project:
 ```mvn spring-boot:run```
-* Open your browser and go to <http://localhost:8080/medicines>
+* Open your API client (insomnia, postman ...) and go to <http://localhost:8080/medicines>

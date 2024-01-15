@@ -29,8 +29,13 @@ public class MedicineService {
         return this.repository.findAll().stream().map(ResponseMedicinesDTO::new).toList();
     }
 
+    public ResponseMedicinesDTO getById(Long id){
+        Medicine medicine = this.repository.getReferenceById(id);
+        return new ResponseMedicinesDTO(medicine);
+    }
+
     public ResponseMedicinesDTO update(Long id, UpdateRequestMedicinesDTO data){
-        Medicine medicine = this.repository.findById(id).orElseThrow(MedicineNotFoundException::new);
+        Medicine medicine = this.repository.getReferenceById(id);
 
         if(data.nome() != null) medicine.setNome(data.nome());
         if(data.via() != null) medicine.setVia(data.via());

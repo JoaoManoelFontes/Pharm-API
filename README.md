@@ -5,6 +5,9 @@
 This project is a CRUD API for a pharmacy management system using Java Spring Boot, only for academic purposes.
 
 ## Features
+* Medicines CRUD
+* Medicine fields validation
+* Medicine DTO
 
 ## Installation
 
